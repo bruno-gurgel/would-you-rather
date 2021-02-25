@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
-import logo from "../logo.svg";
-import { Counter } from "../features/counter/Counter";
 import "../App.css";
 import { useDispatch } from "react-redux";
 import { handleInitialData } from "../redux/modules/shared";
-import { receiveUsers } from "../redux/modules/users";
-import { receiveQuestions } from "../redux/modules/questions";
+import Authentication from "./Authentication";
 
 function App() {
   const dispatch = useDispatch();
@@ -13,7 +10,11 @@ function App() {
   useEffect(() => {
     dispatch(handleInitialData());
   }, [dispatch]);
-  return <div className="App">test</div>;
+  return (
+    <div className="App">
+      <Authentication />
+    </div>
+  );
 }
 
 export default App;
