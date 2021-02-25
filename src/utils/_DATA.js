@@ -134,13 +134,27 @@ export function _getQuestions() {
   });
 }
 
-export function getInitialData() {
-  return Promise.all([_getUsers(), _getQuestions()]).then(
-    ([users, questions]) => ({
-      users,
-      questions,
-    })
-  );
+function formatUser({ username, name }) {
+  return {
+    id: username,
+    name,
+    answers: {},
+    questions: [],
+  };
+}
+
+export function _saveUser({ name, username }) {
+  return new Promise((res, rej) => {
+    const formattedUser = formatUser({ name, username });
+
+    setTimeout(() => {
+      users = {
+        ...users,
+        [username]: formattedUser,
+      };
+      res(users);
+    }, 1000);
+  });
 }
 
 function formatQuestion({ optionOneText, optionTwoText, author }) {
