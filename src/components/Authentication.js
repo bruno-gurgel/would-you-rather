@@ -4,10 +4,12 @@ import Button from "react-bootstrap/Button";
 import logo from "../logo.svg";
 import { handleNewUser, selectUsers } from "../redux/modules/users";
 import { useDispatch, useSelector } from "react-redux";
+import { setAuthedUser } from "../redux/modules/authedUser";
 
 export default function Authentication() {
   const [newUserName, updatenewUserName] = useState("");
   const [newFullName, updatenewFullName] = useState("");
+  const [selectedUser, updateSelectedUser] = useState(null);
 
   const users = useSelector(selectUsers);
   const dispatch = useDispatch();
@@ -18,6 +20,19 @@ export default function Authentication() {
       userNames.push(users[user].name);
     }
     return userNames;
+  };
+
+  const handleSelectChange = (event) => {
+    event.target.value !== "Select an user"
+      ? updateSelectedUser(event.target.value)
+      : updateSelectedUser(null);
+  };
+
+  const handleLogIn = (event) => {
+    event.preventDefault();
+
+    console.log(selectedUser);
+    dispatch(setAuthedUser(selectedUser));
   };
 
   const handleInputChange = (event) => {
@@ -32,15 +47,23 @@ export default function Authentication() {
     event.preventDefault();
 
     dispatch(handleNewUser(newFullName, newUserName));
+    dispatch(setAuthedUser(newUserName));
   };
 
   return (
     <div className="container card bg-light w-50">
-      <Form>
+      <Form onSubmit={handleLogIn}>
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Please Sign in</h1>
         <Form.Group controlId="formUserSelect" className="mt-3">
-          <Form.Control as="select" type="text" className="input w-50">
+          <Form.Control
+            as="select"
+            type="text"
+            className="input w-50"
+            onChange={handleSelectChange}
+            defaultValue={selectedUser}
+          >
+            <option>Select an user</option>
             {getUser().map((name, index) => (
               <option key={index}>{name}</option>
             ))}
