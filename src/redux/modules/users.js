@@ -1,28 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { hideLoading, showLoading } from "react-redux-loading";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { saveUser } from "../../utils/api";
+
+export const handleNewUser = createAsyncThunk(
+  "todos/addNewUser",
+  async (newUserInfo) => {
+    return saveUser(newUserInfo);
+  }
+);
 
 const userSlice = createSlice({
   name: "users",
   initialState: {},
   reducers: {
     receiveUsers: (state, action) => (state = action.payload),
-    addUser: (state, action) => {
-      const payload = action.payload;
-      return { ...state, payload };
-    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(handleNewUser.fulfilled, (state, action) => {
+      const newUser = action.payload;
+      return (state = newUser);
+    });
   },
 });
-
-export function handleNewUser(name, username) {
-  return (dispatch) => {
-    dispatch(showLoading());
-    console.log("redux user");
-    return saveUser({ name, username })
-      .then((newUserInfo) => dispatch(addUser(newUserInfo)))
-      .then(() => dispatch(hideLoading()));
-  };
-}
 
 export const { receiveUsers, addUser } = userSlice.actions;
 
