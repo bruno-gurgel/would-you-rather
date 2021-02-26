@@ -134,23 +134,23 @@ export function _getQuestions() {
   });
 }
 
-function formatUser({ username, name }) {
+function formatUser({ newFullName, newUserName }) {
   return {
-    id: username,
-    name,
+    id: newUserName,
+    name: newFullName,
     answers: {},
     questions: [],
   };
 }
 
-export function _saveUser({ name, username }) {
+export function _saveUser({ newFullName, newUserName }) {
   return new Promise((res, rej) => {
-    const formattedUser = formatUser({ name, username });
+    const formattedUser = formatUser({ newFullName, newUserName });
 
     setTimeout(() => {
       users = {
         ...users,
-        [username]: formattedUser,
+        [newUserName]: formattedUser,
       };
       res(users);
     }, 1000);
