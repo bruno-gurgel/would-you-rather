@@ -5,11 +5,13 @@ import logo from "../logo.svg";
 import { handleNewUser, selectUsers } from "../redux/modules/users";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthedUser } from "../redux/modules/authedUser";
+import Alert from "react-bootstrap/Alert";
 
 export default function Authentication() {
   const [newUserName, updatenewUserName] = useState("");
   const [newFullName, updatenewFullName] = useState("");
   const [selectedUser, updateSelectedUser] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
 
   const users = useSelector(selectUsers);
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ export default function Authentication() {
     event.preventDefault();
 
     users[newUserName]
-      ? alert("Username already in use, please choose another")
+      ? setShowAlert(true)
       : dispatch(handleNewUser({ newFullName, newUserName })).then(() =>
           dispatch(setAuthedUser(newUserName))
         );
@@ -79,6 +81,15 @@ export default function Authentication() {
       <h2>
         Don't have an account? <span className="text-info">Sign up!</span>
       </h2>
+      {showAlert && (
+        <Alert
+          variant="danger"
+          onClose={() => setShowAlert(false)}
+          dismissible={true}
+        >
+          Username already in use, please choose another
+        </Alert>
+      )}
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formNewUser">
           <Form.Control
