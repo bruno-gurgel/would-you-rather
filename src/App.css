@@ -38,10 +38,70 @@
   }
 }
 
-.button {
-}
-
 .input {
   margin: 0 auto;
   width: 10%;
+}
+
+.dashboard {
+  display: flex;
+  width: 50%;
+  margin: 10px auto;
+  border: 1px inset #ccc;
+}
+
+.list-group {
+  width: 100%;
+}
+
+.list-group-item {
+  width: 100%;
+}
+
+.contact-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.contact-list-item {
+  padding: 20px;
+  background: white;
+  display: flex;
+  border-bottom: 1px inset #ccc;
+}
+
+.contact-avatar {
+  width: 120px;
+  height: 120px;
+  margin: auto 20px auto 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-image: url(./avatar.png);
+}
+
+.contact-details {
+  padding-left: 20px;
+  border-left: 1px solid #eee;
+
+  flex: 1;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contact-details p {
+  margin: 0;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.button {
+  margin: 10px auto;
 }
