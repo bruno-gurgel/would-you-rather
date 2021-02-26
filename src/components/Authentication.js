@@ -46,8 +46,11 @@ export default function Authentication() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    dispatch(handleNewUser(newFullName, newUserName));
-    dispatch(setAuthedUser(newUserName));
+    users[newUserName]
+      ? alert("Username already in use, please choose another")
+      : dispatch(handleNewUser({ newFullName, newUserName })).then(() =>
+          dispatch(setAuthedUser(newUserName))
+        );
   };
 
   return (
