@@ -4,12 +4,12 @@ const questionSlice = createSlice({
   name: "questions",
   initialState: {},
   reducers: {
-    receiveQuestions: (state, action) => (state = action.payload),
+    doReceiveQuestions: (state, action) => (state = action.payload),
   },
 });
 
-export const { receiveQuestions } = questionSlice.actions;
+export const { doReceiveQuestions } = questionSlice.actions;
 
-export const selectQuestions = (state) => state.questions;
+export const getQuestions = (state) => state.questions;
 
 export default questionSlice.reducer;

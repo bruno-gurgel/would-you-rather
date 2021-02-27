@@ -2,27 +2,19 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import logo from "../logo.svg";
-import { handleNewUser, selectUsers } from "../redux/modules/users";
+import { handleNewUser, getUsers } from "../redux/modules/users";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthedUser } from "../redux/modules/authedUser";
+import { doAuthedUser } from "../redux/modules/authedUser";
 import Alert from "react-bootstrap/Alert";
 
 export default function Authentication() {
   const [newUserName, updatenewUserName] = useState("");
   const [newFullName, updatenewFullName] = useState("");
   const [selectedUser, updateSelectedUser] = useState(null);
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, updateShowAlert] = useState(false);
 
-  const users = useSelector(selectUsers);
+  const users = useSelector(getUsers);
   const dispatch = useDispatch();
-
-  const getUser = () => {
-    const userNames = [];
-    for (let user of Object.keys(users)) {
-      userNames.push(users[user].name);
-    }
-    return userNames;
-  };
 
   const handleSelectChange = (event) => {
     event.target.value !== "Select an user"
@@ -34,7 +26,7 @@ export default function Authentication() {
     event.preventDefault();
 
     console.log(selectedUser);
-    dispatch(setAuthedUser(selectedUser));
+    dispatch(doAuthedUser(selectedUser));
   };
 
   const handleInputChange = (event) => {
@@ -49,9 +41,9 @@ export default function Authentication() {
     event.preventDefault();
 
     users[newUserName]
-      ? setShowAlert(true)
+      ? updateShowAlert(true)
       : dispatch(handleNewUser({ newFullName, newUserName })).then(() =>
-          dispatch(setAuthedUser(newUserName))
+          dispatch(doAuthedUser(newUserName))
         );
   };
 
@@ -69,9 +61,10 @@ export default function Authentication() {
             defaultValue={selectedUser}
           >
             <option>Select an user</option>
-            {getUser().map((name, index) => (
-              <option key={index}>{name}</option>
-            ))}
+            {Object.keys(users).map((userID, index) => {
+              const userName = users[userID].name;
+              return <option key={index}>{userName}</option>;
+            })}
           </Form.Control>
           <Button variant="primary" type="submit" className="mt-3 button">
             Login
@@ -84,7 +77,7 @@ export default function Authentication() {
       {showAlert && (
         <Alert
           variant="danger"
-          onClose={() => setShowAlert(false)}
+          onClose={() => updateShowAlert(false)}
           dismissible={true}
         >
           Username already in use, please choose another

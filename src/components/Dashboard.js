@@ -3,12 +3,12 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 import PreviewCard from "./PreviewCard";
 import { useSelector } from "react-redux";
-import { selectQuestions } from "../redux/modules/questions";
-import { selectUsers } from "../redux/modules/users";
+import { getQuestions } from "../redux/modules/questions";
+import { getUsers } from "../redux/modules/users";
 
 export default function Dashboard() {
-  const questions = useSelector(selectQuestions);
-  const users = useSelector(selectUsers);
+  const questions = useSelector(getQuestions);
+  const users = useSelector(getUsers);
 
   console.log({ users });
   console.log({ questions });

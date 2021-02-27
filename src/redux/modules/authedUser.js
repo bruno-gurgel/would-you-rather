@@ -4,12 +4,12 @@ const authedUserSlice = createSlice({
   name: "authedUser",
   initialState: null,
   reducers: {
-    setAuthedUser: (state, action) => (state = action.payload),
+    doAuthedUser: (state, action) => (state = action.payload),
   },
 });
 
-export const { setAuthedUser } = authedUserSlice.actions;
+export const { doAuthedUser } = authedUserSlice.actions;
 
-export const selectAuthedUser = (state) => state.authedUser;
+export const getAuthedUser = (state) => state.authedUser;
 
 export default authedUserSlice.reducer;

@@ -12,7 +12,7 @@ const userSlice = createSlice({
   name: "users",
   initialState: {},
   reducers: {
-    receiveUsers: (state, action) => (state = action.payload),
+    doReceiveUsers: (state, action) => (state = action.payload),
   },
   extraReducers: (builder) => {
     builder.addCase(handleNewUser.fulfilled, (state, action) => {
@@ -22,8 +22,8 @@ const userSlice = createSlice({
   },
 });
 
-export const { receiveUsers, addUser } = userSlice.actions;
+export const { doReceiveUsers, addUser } = userSlice.actions;
 
-export const selectUsers = (state) => state.users;
+export const getUsers = (state) => state.users;
 
 export default userSlice.reducer;
