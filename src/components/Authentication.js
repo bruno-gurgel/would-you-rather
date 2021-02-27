@@ -8,7 +8,7 @@ import { doAuthedUser } from "../redux/modules/authedUser";
 import Alert from "react-bootstrap/Alert";
 
 export default function Authentication() {
-  const [newUserName, updatenewUserName] = useState("");
+  const [newUsername, updatenewUsername] = useState("");
   const [newFullName, updatenewFullName] = useState("");
   const [selectedUser, updateSelectedUser] = useState(null);
   const [showAlert, updateShowAlert] = useState(false);
@@ -31,7 +31,7 @@ export default function Authentication() {
 
   const handleInputChange = (event) => {
     if (event.target.name === "Username Input") {
-      updatenewUserName(event.target.value);
+      updatenewUsername(event.target.value);
     } else {
       updatenewFullName(event.target.value);
     }
@@ -40,10 +40,10 @@ export default function Authentication() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    users[newUserName]
+    users[newUsername]
       ? updateShowAlert(true)
-      : dispatch(handleNewUser({ newFullName, newUserName })).then(() =>
-          dispatch(doAuthedUser(newUserName))
+      : dispatch(handleNewUser({ newFullName, newUsername })).then(() =>
+          dispatch(doAuthedUser(newUsername))
         );
   };
 
