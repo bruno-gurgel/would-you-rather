@@ -134,9 +134,9 @@ export function _getQuestions() {
   });
 }
 
-function formatUser({ newFullName, newUserName }) {
+function formatUser({ newFullName, newUsername }) {
   return {
-    id: newUserName,
+    id: newUsername,
     name: newFullName,
     answers: {},
     questions: [],
@@ -152,16 +152,19 @@ export function _saveUser({ newFullName, newUserName }) {
         ...users,
         [newUserName]: formattedUser,
       };
-      res(users);
+      res(formattedUser);
     }, 1000);
   });
 }
 
 function formatQuestion({ optionOneText, optionTwoText, author }) {
+  console.log({ optionOneText });
+  console.log({ optionTwoText });
+  console.log({ author });
   return {
     id: generateUID(),
-    timestamp: Date.now(),
     author,
+    timestamp: Date.now(),
     optionOne: {
       votes: [],
       text: optionOneText,
