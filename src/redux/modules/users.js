@@ -8,7 +8,7 @@ const userSlice = createSlice({
     doReceiveUsers: (state, action) => (state = action.payload),
     doAddUser: (state, action) => {
       const newUser = action.payload;
-      state.users[newUser.id] = newUser;
+      state[newUser.id] = newUser;
     },
   },
 });

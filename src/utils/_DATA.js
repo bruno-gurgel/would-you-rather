@@ -143,14 +143,14 @@ function formatUser({ newFullName, newUsername }) {
   };
 }
 
-export function _saveUser({ newFullName, newUserName }) {
+export function _saveUser({ newFullName, newUsername }) {
   return new Promise((res, rej) => {
-    const formattedUser = formatUser({ newFullName, newUserName });
+    const formattedUser = formatUser({ newFullName, newUsername });
 
     setTimeout(() => {
       users = {
         ...users,
-        [newUserName]: formattedUser,
+        [newUsername]: formattedUser,
       };
       res(formattedUser);
     }, 1000);
