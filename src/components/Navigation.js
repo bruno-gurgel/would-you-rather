@@ -3,10 +3,14 @@ import { Nav, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { doAuthedUser, getAuthedUser } from "../redux/modules/authedUser";
+import { getUsers } from "../redux/modules/users";
 
 export default function Navigation() {
+  const users = useSelector(getUsers);
   const authedUser = useSelector(getAuthedUser);
   const dispatch = useDispatch();
+
+  const authedUserName = users[authedUser].name;
 
   return (
     <Nav fill variant="pills" defaultActiveKey="/" className="mb-4">
@@ -19,7 +23,7 @@ export default function Navigation() {
       </NavLink>
       <Nav.Link eventKey="link-leaderboard">Leaderboard</Nav.Link>
 
-      <NavDropdown title={`Hello, ${authedUser}`} id="nav-dropdown">
+      <NavDropdown title={`Hello, ${authedUserName}`} id="nav-dropdown">
         <NavLink
           exact
           to="/"

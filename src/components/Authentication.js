@@ -47,7 +47,7 @@ export default function Authentication() {
     if (!users[newUsername]) {
       dispatch(showLoading());
       return dispatch(handleNewUser({ newFullName, newUsername })).then(() => {
-        dispatch(doAuthedUser(newFullName));
+        dispatch(doAuthedUser(newUsername));
         updateIsAuthorized(true);
         dispatch(hideLoading());
       });
@@ -76,7 +76,11 @@ export default function Authentication() {
             <option>Select an user</option>
             {Object.keys(users).map((userID, index) => {
               const userName = users[userID].name;
-              return <option key={index}>{userName}</option>;
+              return (
+                <option key={index} value={userID}>
+                  {userName}
+                </option>
+              );
             })}
           </Form.Control>
           <Button variant="primary" type="submit" className="mt-2 button">
