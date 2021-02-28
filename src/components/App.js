@@ -1,23 +1,37 @@
 import React, { useEffect } from "react";
 import "../App.css";
-import { useDispatch } from "react-redux";
-import { handleInitialData } from "../redux/modules/shared";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllData } from "../redux/modules/shared";
 import Authentication from "./Authentication";
 import Dashboard from "./Dashboard";
 import Navigation from "./Navigation";
+import NewQuestion from "./NewQuestion";
+import { Redirect, Route } from "react-router-dom";
+import { getAuthedUser } from "../redux/modules/authedUser";
+import LoadingBar from "react-redux-loading-bar";
 
 function App() {
   const dispatch = useDispatch();
 
-  const authedUser = "John Doe";
+  const authedUser = useSelector(getAuthedUser);
 
   useEffect(() => {
-    dispatch(handleInitialData());
+    dispatch(fetchAllData());
   }, [dispatch]);
+
   return (
     <div className="App">
-      <Navigation authedUser={authedUser} />
-      <Dashboard />
+      <LoadingBar />
+      <Route exact path="/" component={Authentication} />
+      {authedUser === null ? (
+        <Redirect to="/" />
+      ) : (
+        <div>
+          <Navigation authedUser={authedUser} />
+          <Route path="/home" component={Dashboard} />
+          <Route path="/add" component={NewQuestion} />
+        </div>
+      )}
     </div>
   );
 }
