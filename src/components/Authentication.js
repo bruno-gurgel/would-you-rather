@@ -6,12 +6,15 @@ import { handleNewUser, getUsers } from "../redux/modules/users";
 import { useDispatch, useSelector } from "react-redux";
 import { doAuthedUser } from "../redux/modules/authedUser";
 import Alert from "react-bootstrap/Alert";
+import { Redirect } from "react-router-dom";
+import { hideLoading, showLoading } from "react-redux-loading";
 
 export default function Authentication() {
   const [newUsername, updatenewUsername] = useState("");
   const [newFullName, updatenewFullName] = useState("");
   const [selectedUser, updateSelectedUser] = useState(null);
   const [showAlert, updateShowAlert] = useState(false);
+  const [isAuthorized, updateIsAuthorized] = useState(false);
 
   const users = useSelector(getUsers);
   const dispatch = useDispatch();
@@ -27,6 +30,7 @@ export default function Authentication() {
 
     console.log(selectedUser);
     dispatch(doAuthedUser(selectedUser));
+    updateIsAuthorized(true);
   };
 
   const handleInputChange = (event) => {
@@ -37,18 +41,27 @@ export default function Authentication() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    users[newUsername]
-      ? updateShowAlert(true)
-      : dispatch(handleNewUser({ newFullName, newUsername })).then(() =>
-          dispatch(doAuthedUser(newUsername))
-        );
+    if (!users[newUsername]) {
+      dispatch(showLoading());
+      return dispatch(handleNewUser({ newFullName, newUsername })).then(() => {
+        dispatch(doAuthedUser(newFullName));
+        updateIsAuthorized(true);
+        dispatch(hideLoading());
+      });
+    } else {
+      updateShowAlert(true);
+    }
   };
 
+  if (isAuthorized === true) {
+    return <Redirect to="/home" />;
+  }
+
   return (
-    <div className="container card bg-light w-50">
+    <div className="container card bg-light w-75">
       <Form onSubmit={handleLogIn}>
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Please Sign in</h1>
@@ -66,12 +79,12 @@ export default function Authentication() {
               return <option key={index}>{userName}</option>;
             })}
           </Form.Control>
-          <Button variant="primary" type="submit" className="mt-3 button">
+          <Button variant="primary" type="submit" className="mt-2 button">
             Login
           </Button>
         </Form.Group>
       </Form>
-      <h2>
+      <h2 className="mb-3">
         Don't have an account? <span className="text-info">Sign up!</span>
       </h2>
       {showAlert && (
@@ -84,27 +97,31 @@ export default function Authentication() {
         </Alert>
       )}
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formNewUser">
-          <Form.Control
-            type="text"
-            placeholder="Enter your full name"
-            className="mt-3 w-50 input"
-            name="Full Name Input"
-            onChange={handleInputChange}
-            required
-          />
-          <Form.Control
-            type="text"
-            placeholder="Enter an Username"
-            className="mt-3 w-50 input"
-            name="Username Input"
-            onChange={handleInputChange}
-            required
-          />
-          <Button variant="primary" type="submit" className="mt-3 button">
-            Sign Up
-          </Button>
-        </Form.Group>
+        <Form.Row className="justify-content-around">
+          <Form.Group controlId="formNewUser" className="form-new-user">
+            <Form.Control
+              type="text"
+              placeholder="Enter your first and last name"
+              className="inpu"
+              name="Full Name Input"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId="formNewUser" className="form-new-user">
+            <Form.Control
+              type="text"
+              placeholder="Enter an Username"
+              className="input"
+              name="Username Input"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Group>
+        </Form.Row>
+        <Button variant="primary" type="submit" className="mt-3 button">
+          Sign Up
+        </Button>
       </Form>
     </div>
   );
