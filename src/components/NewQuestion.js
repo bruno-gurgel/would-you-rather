@@ -3,6 +3,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuthedUser } from "../redux/modules/authedUser";
 import { handleNewQuestion } from "../redux/modules/questions";
+import { fetchAllData } from "../redux/modules/shared";
 
 export default function NewQuestion() {
   const [optionOneText, updateOptionOneText] = useState("");
@@ -14,11 +15,9 @@ export default function NewQuestion() {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    console.log({ optionOneText });
-    console.log({ optionTwoText });
-    console.log({ author });
-
-    dispatch(handleNewQuestion({ optionOneText, optionTwoText, author }));
+    dispatch(
+      handleNewQuestion({ optionOneText, optionTwoText, author })
+    ).then(() => dispatch(fetchAllData()));
     updateOptionOneText("");
     updateOptionTwoText("");
   };
