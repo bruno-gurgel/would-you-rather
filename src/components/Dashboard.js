@@ -33,10 +33,12 @@ export default function Dashboard() {
       <ul className="list-group contact-list">
         {questionsArray.map((questionID) => {
           const questionAuthor = users[questions[questionID].author].name;
+          const authorsID = questions[questionID].author;
           const questionPreview = questions[questionID].optionOne.text;
           return (
             <PreviewCard
               key={questionID}
+              avatar={users[authorsID].avatarURL}
               questionAuthor={questionAuthor}
               questionPreview={questionPreview}
             />
@@ -70,6 +72,19 @@ export default function Dashboard() {
         {viewAnsweredQuestions
           ? returnPreviewCards(answeredQuestionsList)
           : returnPreviewCards(questionsNotAnsweredList)}
+        <div className="p-2" id="icons-attribute">
+          Icons made by{" "}
+          <a
+            href="https://www.flaticon.com/authors/icongeek26"
+            title="Icongeek26"
+          >
+            Icongeek26
+          </a>{" "}
+          from{" "}
+          <a href="https://www.flaticon.com/" title="Flaticon">
+            www.flaticon.com
+          </a>
+        </div>
       </Container>
     </div>
   );
