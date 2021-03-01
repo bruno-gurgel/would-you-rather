@@ -2,7 +2,7 @@ let users = {
   sarahedo: {
     id: "sarahedo",
     name: "Sarah Edo",
-    // avatarURL: ,
+    avatarURL: "avatars/25-woman.png",
     answers: {
       "8xf0y6ziyjabvozdd253nd": "optionOne",
       "6ni6ok3ym7mf1p33lnez": "optionTwo",
@@ -14,7 +14,7 @@ let users = {
   tylermcginnis: {
     id: "tylermcginnis",
     name: "Tyler McGinnis",
-    // avatarURL: ,
+    avatarURL: "avatars/24-man.png",
     answers: {
       vthrdm985a262al8qx3do: "optionOne",
       xj352vofupe1dqz9emx13r: "optionTwo",
@@ -24,7 +24,7 @@ let users = {
   johndoe: {
     id: "johndoe",
     name: "John Doe",
-    // avatarURL: ,
+    avatarURL: "avatars/25-man.png",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
       vthrdm985a262al8qx3do: "optionTwo",
@@ -134,18 +134,28 @@ export function _getQuestions() {
   });
 }
 
-function formatUser({ newFullName, newUsername }) {
+function formatUser({ newFullName, newUsername, gender }) {
+  console.log(gender);
+  let avatarURL = null;
+  if (gender === "male") {
+    avatarURL = `avatars/${Math.floor(Math.random() * 23) + 1}-man.png`;
+  } else if (gender === "female") {
+    avatarURL = `avatars/${Math.floor(Math.random() * 24) + 1}-woman.png`;
+  } else {
+    avatarURL = `avatars/default-avatar.png`;
+  }
   return {
     id: newUsername,
     name: newFullName,
+    avatarURL,
     answers: {},
     questions: [],
   };
 }
 
-export function _saveUser({ newFullName, newUsername }) {
+export function _saveUser({ newFullName, newUsername, gender }) {
   return new Promise((res, rej) => {
-    const formattedUser = formatUser({ newFullName, newUsername });
+    const formattedUser = formatUser({ newFullName, newUsername, gender });
 
     setTimeout(() => {
       users = {

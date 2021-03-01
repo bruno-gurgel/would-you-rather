@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import logo from "../logo.svg";
 import { handleNewUser, getUsers } from "../redux/modules/users";
 import { useDispatch, useSelector } from "react-redux";
 import { doAuthedUser } from "../redux/modules/authedUser";
@@ -12,6 +11,7 @@ import { hideLoading, showLoading } from "react-redux-loading-bar";
 export default function Authentication() {
   const [newUsername, updatenewUsername] = useState("");
   const [newFullName, updatenewFullName] = useState("");
+  const [gender, updateGender] = useState(null);
   const [selectedUser, updateSelectedUser] = useState(null);
   const [showAlert, updateShowAlert] = useState(false);
   const [isAuthorized, updateIsAuthorized] = useState(false);
@@ -45,11 +45,13 @@ export default function Authentication() {
 
     if (!users[newUsername]) {
       dispatch(showLoading());
-      return dispatch(handleNewUser({ newFullName, newUsername })).then(() => {
-        dispatch(doAuthedUser(newUsername));
-        updateIsAuthorized(true);
-        dispatch(hideLoading());
-      });
+      return dispatch(handleNewUser({ newFullName, newUsername, gender })).then(
+        () => {
+          dispatch(doAuthedUser(newUsername));
+          updateIsAuthorized(true);
+          dispatch(hideLoading());
+        }
+      );
     } else {
       updateShowAlert(true);
     }
@@ -60,10 +62,10 @@ export default function Authentication() {
   }
 
   return (
-    <div className="container card bg-light w-75">
+    <div className="container card bg-light w-75 mt-5 p-0">
       <Form onSubmit={handleLogIn}>
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Please Sign in</h1>
+        <h1 className="mb-4 card-header">Would you rather...</h1>
+        <h2>Please Sign in</h2>
         <Form.Group controlId="formUserSelect" className="mt-3">
           <Form.Control
             as="select"
@@ -87,9 +89,9 @@ export default function Authentication() {
           </Button>
         </Form.Group>
       </Form>
-      <h2 className="mb-3">
+      <h3 className="mb-3">
         Don't have an account? <span className="text-info">Sign up!</span>
-      </h2>
+      </h3>
       {showAlert && (
         <Alert
           variant="danger"
@@ -100,28 +102,56 @@ export default function Authentication() {
         </Alert>
       )}
       <Form onSubmit={handleSubmit}>
-        <Form.Row className="justify-content-around">
-          <Form.Group controlId="formNewUser" className="form-new-user">
-            <Form.Control
-              type="text"
-              placeholder="Enter your first and last name"
-              className="inpu"
-              name="Full Name Input"
-              onChange={handleInputChange}
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="formNewUser" className="form-new-user">
-            <Form.Control
-              type="text"
-              placeholder="Enter an Username"
-              className="input"
-              name="Username Input"
-              onChange={handleInputChange}
-              required
-            />
-          </Form.Group>
-        </Form.Row>
+        <Form.Group controlId="formNewUser" className="form-new-user mx-auto">
+          <Form.Control
+            type="text"
+            placeholder="Enter your first and last name"
+            className="input"
+            name="Full Name Input"
+            onChange={handleInputChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group controlId="formNewUser" className="form-new-user mx-auto">
+          <Form.Control
+            type="text"
+            placeholder="Enter an Username"
+            className="input"
+            name="Username Input"
+            onChange={handleInputChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group
+          controlId="formNewUser"
+          className="form-new-user mx-auto"
+          onChange={(event) => updateGender(event.target.value)}
+        >
+          <Form.Check
+            inline
+            type="radio"
+            label="Male"
+            name="genderRadio"
+            value="male"
+            required
+          />
+          <Form.Check
+            inline
+            type="radio"
+            label="Female"
+            name="genderRadio"
+            value="female"
+            required
+          />
+          <Form.Check
+            inline
+            type="radio"
+            label="Other"
+            name="genderRadio"
+            value="other"
+            required
+          />
+        </Form.Group>
         <Button variant="primary" type="submit" className="mt-3 button">
           Sign Up
         </Button>
