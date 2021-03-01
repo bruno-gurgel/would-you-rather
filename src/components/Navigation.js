@@ -13,7 +13,7 @@ export default function Navigation() {
   const authedUserName = users[authedUser].name;
 
   return (
-    <Nav fill variant="pills" defaultActiveKey="/" className="mb-4">
+    <Nav variant="pills" defaultActiveKey="/" className="mb-4">
       <NavLink exact to="/home" className="nav-link">
         Home
       </NavLink>
@@ -21,9 +21,14 @@ export default function Navigation() {
       <NavLink exact to="/add" className="nav-link">
         New Question
       </NavLink>
-      <Nav.Link eventKey="link-leaderboard">Leaderboard</Nav.Link>
-
-      <NavDropdown title={`Hello, ${authedUserName}`} id="nav-dropdown">
+      <NavLink exact to="/leaderboard" className="nav-link">
+        Leaderboard
+      </NavLink>
+      <NavDropdown
+        title={`Hello, ${authedUserName}`}
+        id="nav-dropdown"
+        className="ml-auto"
+      >
         <NavLink
           exact
           to="/"
@@ -32,8 +37,6 @@ export default function Navigation() {
         >
           Logout
         </NavLink>
-        <NavDropdown.Divider />
-        <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
       </NavDropdown>
     </Nav>
   );

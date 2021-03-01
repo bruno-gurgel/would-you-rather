@@ -73,19 +73,27 @@
 }
 
 .contact-avatar {
-  width: 120px;
-  height: 120px;
   margin: auto 20px auto 0;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
   flex-shrink: 0;
-  background-image: url(./avatar.png);
+}
+
+.avatar-preview {
+  width: 120px;
+  height: 120px;
+}
+
+.avatar-leaderboard {
+  width: 80px;
+  height: 80px;
 }
 
 .contact-details {
-  padding-left: 20px;
+  padding: 0 20px;
   border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
 
   flex: 1;
   overflow: hidden;
@@ -108,4 +116,16 @@
 
 .form-new-user {
   width: 40%;
+}
+
+.number-circle {
+  background: #5ea226;
+  border-radius: 25%;
+  font-weight: bold;
+  width: 60%;
+  height: 50px;
+  margin: auto auto;
+  line-height: 50px;
+  color: #ffffff;
+  font-size: 30px;
 }

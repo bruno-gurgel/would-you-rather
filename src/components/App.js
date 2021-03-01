@@ -9,6 +9,7 @@ import NewQuestion from "./NewQuestion";
 import { Redirect, Route } from "react-router-dom";
 import { getAuthedUser } from "../redux/modules/authedUser";
 import LoadingBar from "react-redux-loading-bar";
+import Leaderboard from "./Leaderboard";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
           <Navigation authedUser={authedUser} />
           <Route path="/home" component={Dashboard} />
           <Route path="/add" component={NewQuestion} />
+          <Route path="/leaderboard" component={Leaderboard} />
         </div>
       )}
     </div>
