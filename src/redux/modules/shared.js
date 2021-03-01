@@ -1,7 +1,7 @@
 import { getInitialData } from "../../utils/api";
 import { doReceiveUsers } from "./users";
 import { doReceiveQuestions } from "./questions";
-import { hideLoading, showLoading } from "react-redux-loading";
+import { hideLoading, showLoading } from "react-redux-loading-bar";
 
 export function fetchAllData() {
   return (dispatch) => {

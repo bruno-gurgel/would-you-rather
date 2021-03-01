@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { doAuthedUser } from "../redux/modules/authedUser";
 import Alert from "react-bootstrap/Alert";
 import { Redirect } from "react-router-dom";
-import { hideLoading, showLoading } from "react-redux-loading";
+import { hideLoading, showLoading } from "react-redux-loading-bar";
 
 export default function Authentication() {
   const [newUsername, updatenewUsername] = useState("");
@@ -28,7 +28,6 @@ export default function Authentication() {
   const handleLogIn = (event) => {
     event.preventDefault();
 
-    console.log(selectedUser);
     dispatch(doAuthedUser(selectedUser));
     updateIsAuthorized(true);
   };
