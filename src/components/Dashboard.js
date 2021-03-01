@@ -3,21 +3,29 @@ import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import PreviewCard from "./PreviewCard";
 import { useSelector } from "react-redux";
-import { getQuestions } from "../redux/modules/questions";
+import {
+  getQuestions,
+  getSortedQuestionsIDs,
+} from "../redux/modules/questions";
 import { getUsers } from "../redux/modules/users";
 import { getAuthedUser } from "../redux/modules/authedUser";
 
 export default function Dashboard() {
   const questions = useSelector(getQuestions);
+  const sortedQuestionsIDs = useSelector(getSortedQuestionsIDs);
   const users = useSelector(getUsers);
   const authedUser = useSelector(getAuthedUser);
 
   const [viewAnsweredQuestions, updateViewAnsweredQuestions] = useState(false);
 
-  const answeredQuestions = Object.keys(users[authedUser].answers);
+  const questionsAnsweredByAuthedUser = Object.keys(users[authedUser].answers);
 
-  const questionsNotAnswered = Object.keys(questions).filter(
-    (question) => !answeredQuestions.includes(question)
+  const answeredQuestionsList = sortedQuestionsIDs.filter((question) =>
+    questionsAnsweredByAuthedUser.includes(question)
+  );
+
+  const questionsNotAnsweredList = sortedQuestionsIDs.filter(
+    (question) => !answeredQuestionsList.includes(question)
   );
 
   const returnPreviewCards = (questionsArray) => {
@@ -60,8 +68,8 @@ export default function Dashboard() {
           </Button>
         </Row>
         {viewAnsweredQuestions
-          ? returnPreviewCards(answeredQuestions)
-          : returnPreviewCards(questionsNotAnswered)}
+          ? returnPreviewCards(answeredQuestionsList)
+          : returnPreviewCards(questionsNotAnsweredList)}
       </Container>
     </div>
   );

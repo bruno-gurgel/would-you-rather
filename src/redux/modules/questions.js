@@ -22,5 +22,10 @@ export const handleNewQuestion = (newQuestionInfo) => async (dispatch) => {
 };
 
 export const getQuestions = (state) => state.questions;
+export const getSortedQuestionsIDs = (state) => {
+  return Object.keys(state.questions).sort(
+    (a, b) => state.questions[b].timestamp - state.questions[a].timestamp
+  );
+};
 
 export default questionSlice.reducer;
