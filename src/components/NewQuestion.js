@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { getAuthedUser } from "../redux/modules/authedUser";
 import { handleNewQuestion } from "../redux/modules/questions";
 import { fetchAllData } from "../redux/modules/shared";
@@ -8,6 +9,7 @@ import { fetchAllData } from "../redux/modules/shared";
 export default function NewQuestion() {
   const [optionOneText, updateOptionOneText] = useState("");
   const [optionTwoText, updateOptionTwoText] = useState("");
+  const [toHome, updateToHome] = useState(false);
 
   const dispatch = useDispatch();
   const author = useSelector(getAuthedUser);
@@ -20,7 +22,12 @@ export default function NewQuestion() {
     ).then(() => dispatch(fetchAllData()));
     updateOptionOneText("");
     updateOptionTwoText("");
+    updateToHome(true);
   };
+
+  if (toHome === true) {
+    return <Redirect to="/home" />;
+  }
 
   return (
     <Container className="card">
