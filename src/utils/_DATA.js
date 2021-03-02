@@ -135,7 +135,6 @@ export function _getQuestions() {
 }
 
 function formatUser({ newFullName, newUsername, gender }) {
-  console.log(gender);
   let avatarURL = null;
   if (gender === "male") {
     avatarURL = `avatars/${Math.floor(Math.random() * 23) + 1}-man.png`;
@@ -168,9 +167,6 @@ export function _saveUser({ newFullName, newUsername, gender }) {
 }
 
 function formatQuestion({ optionOneText, optionTwoText, author }) {
-  console.log({ optionOneText });
-  console.log({ optionTwoText });
-  console.log({ author });
   return {
     id: generateUID(),
     author,
