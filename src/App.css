@@ -118,3 +118,9 @@
 .user-card {
   list-style-type: none;
 }
+
+.selected-badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
