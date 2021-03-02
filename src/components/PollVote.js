@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuthedUser } from "../redux/modules/authedUser";
-import { handleNewAnswer } from "../redux/modules/questions";
+import { handleNewAnswer } from "../redux/modules/shared";
 import { fetchAllData } from "../redux/modules/shared";
 
 export default function PollVote(props) {
