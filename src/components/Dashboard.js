@@ -30,7 +30,7 @@ export default function Dashboard() {
 
   const returnPreviewCards = (questionsArray) => {
     return (
-      <ul className="list-group contact-list">
+      <ul className="contact-list">
         {questionsArray.map((questionID) => {
           const questionAuthor = users[questions[questionID].author].name;
           const authorsID = questions[questionID].author;
@@ -38,6 +38,7 @@ export default function Dashboard() {
           return (
             <PreviewCard
               key={questionID}
+              id={questionID}
               avatar={users[authorsID].avatarURL}
               questionAuthor={questionAuthor}
               questionPreview={questionPreview}
@@ -49,43 +50,41 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="dashboard">
-      <Container fluid="md">
-        <Row>
-          <Button
-            className="w-50"
-            variant="info"
-            active={!viewAnsweredQuestions}
-            onClick={() => updateViewAnsweredQuestions(false)}
-          >
-            Unanswered Questions
-          </Button>
-          <Button
-            className="w-50"
-            variant="info"
-            active={viewAnsweredQuestions}
-            onClick={() => updateViewAnsweredQuestions(true)}
-          >
-            Answered Questions
-          </Button>
-        </Row>
-        {viewAnsweredQuestions
-          ? returnPreviewCards(answeredQuestionsList)
-          : returnPreviewCards(questionsNotAnsweredList)}
-        <div className="p-2" id="icons-attribute">
-          Icons made by{" "}
-          <a
-            href="https://www.flaticon.com/authors/icongeek26"
-            title="Icongeek26"
-          >
-            Icongeek26
-          </a>{" "}
-          from{" "}
-          <a href="https://www.flaticon.com/" title="Flaticon">
-            www.flaticon.com
-          </a>
-        </div>
-      </Container>
-    </div>
+    <Container fluid="md" className="w-50  border p-0 overflow-hidden">
+      <Row>
+        <Button
+          className="w-50"
+          variant="info"
+          active={!viewAnsweredQuestions}
+          onClick={() => updateViewAnsweredQuestions(false)}
+        >
+          Unanswered Questions
+        </Button>
+        <Button
+          className="w-50"
+          variant="info"
+          active={viewAnsweredQuestions}
+          onClick={() => updateViewAnsweredQuestions(true)}
+        >
+          Answered Questions
+        </Button>
+      </Row>
+      {viewAnsweredQuestions
+        ? returnPreviewCards(answeredQuestionsList)
+        : returnPreviewCards(questionsNotAnsweredList)}
+      <div className="p-2" id="icons-attribute">
+        Icons made by{" "}
+        <a
+          href="https://www.flaticon.com/authors/icongeek26"
+          title="Icongeek26"
+        >
+          Icongeek26
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
+    </Container>
   );
 }

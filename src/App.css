@@ -43,21 +43,6 @@
   width: 10%;
 }
 
-.dashboard {
-  display: flex;
-  width: 50%;
-  margin: 10px auto;
-  border: 1px inset #ccc;
-}
-
-.list-group {
-  width: 100%;
-}
-
-.list-group-item {
-  width: 100%;
-}
-
 .contact-list {
   width: 100%;
   margin: 0;
@@ -128,4 +113,8 @@
   line-height: 50px;
   color: #ffffff;
   font-size: 30px;
+}
+
+.user-card {
+  list-style-type: none;
 }
