@@ -8,13 +8,19 @@ import Alert from "react-bootstrap/Alert";
 import { Redirect } from "react-router-dom";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 
-export default function Authentication() {
+export default function Authentication(props) {
   const [newUsername, updatenewUsername] = useState("");
   const [newFullName, updatenewFullName] = useState("");
   const [gender, updateGender] = useState(null);
   const [selectedUser, updateSelectedUser] = useState(null);
   const [showAlert, updateShowAlert] = useState(false);
   const [isAuthorized, updateIsAuthorized] = useState(false);
+
+  const { redirectedFrom } = props.location.state || {
+    redirectedFrom: {
+      pathname: "/",
+    },
+  };
 
   const users = useSelector(getUsers);
   const dispatch = useDispatch();
@@ -58,7 +64,7 @@ export default function Authentication() {
   };
 
   if (isAuthorized === true) {
-    return <Redirect to="/home" />;
+    return <Redirect to={redirectedFrom} />;
   }
 
   return (
@@ -84,7 +90,12 @@ export default function Authentication() {
               );
             })}
           </Form.Control>
-          <Button variant="primary" type="submit" className="mt-2 button">
+          <Button
+            variant="primary"
+            type="submit"
+            className="mt-2 button"
+            disabled={selectedUser === null}
+          >
             Login
           </Button>
         </Form.Group>
@@ -152,7 +163,12 @@ export default function Authentication() {
             required
           />
         </Form.Group>
-        <Button variant="primary" type="submit" className="mt-3 button">
+        <Button
+          variant="primary"
+          type="submit"
+          className="mt-3 button"
+          disabled={newFullName === "" || newUsername === "" || gender === null}
+        >
           Sign Up
         </Button>
       </Form>

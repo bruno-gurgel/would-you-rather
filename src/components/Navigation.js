@@ -14,7 +14,7 @@ export default function Navigation() {
 
   return (
     <Nav variant="pills" defaultActiveKey="/" className="mb-4">
-      <NavLink exact to="/home" className="nav-link">
+      <NavLink exact to="/" className="nav-link">
         Home
       </NavLink>
 
@@ -31,7 +31,7 @@ export default function Navigation() {
       >
         <NavLink
           exact
-          to="/"
+          to="/auth"
           className="dropdown-item"
           onClick={() => dispatch(doAuthedUser(null))}
         >

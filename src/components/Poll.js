@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { getAuthedUser } from "../redux/modules/authedUser";
 import { getQuestions } from "../redux/modules/questions";
 import { getUsers } from "../redux/modules/users";
@@ -12,6 +13,11 @@ export default function Poll(props) {
   const authedUser = useSelector(getAuthedUser);
 
   const questionID = props.match.params.id;
+
+  if (!questions[questionID]) {
+    return <Redirect to="/error" />;
+  }
+
   const authorID = questions[questionID].author;
   const authorName = users[questions[questionID].author].name;
   const authorAvatar = users[authorID].avatarURL;

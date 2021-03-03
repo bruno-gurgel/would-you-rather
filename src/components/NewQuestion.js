@@ -26,7 +26,7 @@ export default function NewQuestion() {
   };
 
   if (toHome === true) {
-    return <Redirect to="/home" />;
+    return <Redirect to="/" />;
   }
 
   return (
@@ -52,7 +52,12 @@ export default function NewQuestion() {
             onChange={(event) => updateOptionTwoText(event.target.value)}
           />
         </Form.Group>
-        <Button type="submit" className="m-3" variant="success">
+        <Button
+          type="submit"
+          className="m-3"
+          variant="success"
+          disabled={optionOneText === "" || optionTwoText === ""}
+        >
           Submit
         </Button>
       </Form>
