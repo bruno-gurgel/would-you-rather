@@ -29,6 +29,9 @@ export default function Dashboard() {
   );
 
   const returnPreviewCards = (questionsArray) => {
+    if (questionsArray.length === 0) {
+      return <h3 className="mt-3 text-danger">No questions to show</h3>;
+    }
     return (
       <ul className="contact-list">
         {questionsArray.map((questionID) => {
