@@ -1,68 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Would You Rather...
+This project was made during [Udacity's React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019) and it is a web app that lets a user play the “Would You Rather?” game.
 
-## Available Scripts
+**The game goes like this:** A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. Answering "neither" or "both" is against the rules.
 
-In the project directory, you can run:
+In this app, users are able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
 
-### `yarn start`
+## Technologies used
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[React](https://reactjs.org/), [Redux Toolkit](https://redux-toolkit.js.org/) & [React-Bootstrap](https://react-bootstrap.github.io/).
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Starting the App
+- Install al the project dependencies with `npm install`;
+- Start the development server with `npm start`.
 
-### `yarn test`
+**Obs: Since this app was created with the newly released npm version 7, it creates a package-lock.json version 2, that may cause some problems if you don't have this npm version. In this case you should install and start the app with yarn install and yarn start. [Here are the instructions to install yarn](https://yarnpkg.com/getting-started/install)**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Obs²: With NPM version 7, they introduced [Peer dependencies](https://github.blog/2021-02-02-npm-7-is-now-generally-available/#peer-dependencies). And some packages have not released versions that are made for React 17 (or other new package), but that doesn't mean that those packages don't work. If you face this issue, you can use --force, or --legacy-peer-deps, [here is a more detailded explanation](https://stackoverflow.com/questions/66020820/npm-when-to-use-force-and-legacy-peer-deps/66035709).**
 
-### `yarn build`
+## Contributions
+Any contributtions and/or suggestions are greatly appreciated.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## License
+[MIT License](https://opensource.org/licenses/MIT).
