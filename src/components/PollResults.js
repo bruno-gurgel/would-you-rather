@@ -40,6 +40,9 @@ export default function PoolResults(props) {
                 label={`${optionOnePercentage}%`}
                 variant={props.selectedAnswer === "optionOne" && "warning"}
               />
+              <p className="font-weight-bold">
+                {props.optionOneVotes} out of {totalVotes} votes
+              </p>
             </Form.Group>
             <Form.Group className="card">
               <h6 className="font-weight-light card-header">
@@ -57,10 +60,26 @@ export default function PoolResults(props) {
                   label={`${optionTwoPercentage}%`}
                   variant={props.selectedAnswer === "optionTwo" && "warning"}
                 />
+                <p className="font-weight-bold">
+                  {props.optionTwoVotes} out of {totalVotes} votes
+                </p>
               </div>
             </Form.Group>
           </Form>
         </div>
+      </div>
+      <div className="p-2 border-top" id="icons-attribute">
+        Icons made by{" "}
+        <a
+          href="https://www.flaticon.com/authors/icongeek26"
+          title="Icongeek26"
+        >
+          Icongeek26
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
       </div>
     </li>
   );
