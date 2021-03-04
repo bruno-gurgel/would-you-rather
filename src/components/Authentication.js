@@ -81,10 +81,10 @@ export default function Authentication(props) {
             defaultValue={selectedUser}
           >
             <option>Select an user</option>
-            {Object.keys(users).map((userID, index) => {
+            {Object.keys(users).map((userID) => {
               const userName = users[userID].name;
               return (
-                <option key={index} value={userID}>
+                <option key={userID} value={userID}>
                   {userName}
                 </option>
               );
