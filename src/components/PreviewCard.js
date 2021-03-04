@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export default function PreviewCard(props) {
   return (
@@ -26,3 +27,10 @@ export default function PreviewCard(props) {
     </li>
   );
 }
+
+PreviewCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  questionAuthor: PropTypes.string.isRequired,
+  questionPreview: PropTypes.string.isRequired,
+};

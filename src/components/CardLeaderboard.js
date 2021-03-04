@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default function CardLeaderboard(props) {
   return (
@@ -25,3 +26,11 @@ export default function CardLeaderboard(props) {
     </li>
   );
 }
+
+CardLeaderboard.propTypes = {
+  avatar: PropTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
+  answeredQuestions: PropTypes.number.isRequired,
+  createdQuestions: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
+};

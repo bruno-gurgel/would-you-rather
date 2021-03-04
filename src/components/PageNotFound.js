@@ -1,6 +1,7 @@
 import { Button } from "react-bootstrap";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export default function PageNotFound(props) {
   const { updateIsPageNotFound } = props;
@@ -30,3 +31,7 @@ export default function PageNotFound(props) {
     </div>
   );
 }
+
+PageNotFound.propTypes = {
+  updateIsPageNotFound: PropTypes.func.isRequired,
+};

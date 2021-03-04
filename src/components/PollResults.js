@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, ProgressBar } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 export default function PoolResults(props) {
   const totalVotes = props.optionOneVotes + props.optionTwoVotes;
@@ -84,3 +85,13 @@ export default function PoolResults(props) {
     </li>
   );
 }
+
+PoolResults.propTypes = {
+  authorName: PropTypes.string.isRequired,
+  authorAvatar: PropTypes.string.isRequired,
+  optionOne: PropTypes.string.isRequired,
+  optionTwo: PropTypes.string.isRequired,
+  optionOneVotes: PropTypes.number.isRequired,
+  optionTwoVotes: PropTypes.number.isRequired,
+  selectedAnswer: PropTypes.string.isRequired,
+};
